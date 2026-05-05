@@ -12,19 +12,31 @@
 <ul id="cart"></ul>
 
 <script>
-const products = ["T-Shirt", "Shoes", "Bag"];
-let cart = [];
+const products = [
+  {name: "T-Shirt", img: "https://via.placeholder.com/100"},
+  {name: "Shoes", img: "https://via.placeholder.com/100"},
+  {name: "Bag", img: "https://via.placeholder.com/100"}
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function showProducts(list) {
   let output = "";
   list.forEach(p => {
-    output += `<p>${p} <button onclick="addToCart('${p}')">Add</button></p>`;
+    output += `
+      <div>
+        <img src="${p.img}">
+        <p>${p.name}</p>
+        <button onclick="addToCart('${p.name}')">Add</button>
+      </div>
+    `;
   });
   document.getElementById("products").innerHTML = output;
 }
 
 function addToCart(item) {
   cart.push(item);
+  localStorage.setItem("cart", JSON.stringify(cart));
   showCart();
 }
 
@@ -38,11 +50,12 @@ function showCart() {
 
 function searchProduct() {
   let value = document.getElementById("search").value.toLowerCase();
-  let filtered = products.filter(p => p.toLowerCase().includes(value));
+  let filtered = products.filter(p => p.name.toLowerCase().includes(value));
   showProducts(filtered);
 }
 
 showProducts(products);
+showCart();
 </script>
 
 </body>
