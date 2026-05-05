@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>My Shop</title>
+</head>
 <body>
 
-<h1>My Shop</h1>
+<h1>My Shopping Site</h1>
 
 <input type="text" id="search" placeholder="Search..." onkeyup="searchProduct()">
 
+<h2>Products</h2>
 <div id="products"></div>
 
 <h2>Cart</h2>
@@ -13,9 +17,9 @@
 
 <script>
 const products = [
-  {name: "T-Shirt", img: "https://via.placeholder.com/100"},
-  {name: "Shoes", img: "https://via.placeholder.com/100"},
-  {name: "Bag", img: "https://via.placeholder.com/100"}
+  {name: "T-Shirt", img: "https://picsum.photos/100?1"},
+  {name: "Shoes", img: "https://picsum.photos/100?2"},
+  {name: "Bag", img: "https://picsum.photos/100?3"}
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -27,7 +31,7 @@ function showProducts(list) {
       <div>
         <img src="${p.img}">
         <p>${p.name}</p>
-        <button onclick="addToCart('${p.name}')">Add</button>
+        <button onclick="addToCart('${p.name}')">Add to Cart</button>
       </div>
     `;
   });
