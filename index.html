@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>My Shop</h1>
+
+<input type="text" id="search" placeholder="Search..." onkeyup="searchProduct()">
+
+<div id="products"></div>
+
+<h2>Cart</h2>
+<ul id="cart"></ul>
+
+<script>
+const products = ["T-Shirt", "Shoes", "Bag"];
+let cart = [];
+
+function showProducts(list) {
+  let output = "";
+  list.forEach(p => {
+    output += `<p>${p} <button onclick="addToCart('${p}')">Add</button></p>`;
+  });
+  document.getElementById("products").innerHTML = output;
+}
+
+function addToCart(item) {
+  cart.push(item);
+  showCart();
+}
+
+function showCart() {
+  let output = "";
+  cart.forEach(c => {
+    output += `<li>${c}</li>`;
+  });
+  document.getElementById("cart").innerHTML = output;
+}
+
+function searchProduct() {
+  let value = document.getElementById("search").value.toLowerCase();
+  let filtered = products.filter(p => p.toLowerCase().includes(value));
+  showProducts(filtered);
+}
+
+showProducts(products);
+</script>
+
+</body>
+</html>
